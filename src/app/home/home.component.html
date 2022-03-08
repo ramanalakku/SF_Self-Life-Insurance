@@ -78,11 +78,7 @@
   <button type="button" class="btncolor" (click)="gotoHome()">Start a Quote</button>
 
 </div>
-
-
-
-  
- 
+<!-- //////////////////////////////////////////////////////////////////////// -->
 <div *ngIf="persnalinfo">
   <form id="regForm" [formGroup]="form" (ngSubmit)="onSubmit()">
 
@@ -143,11 +139,12 @@
   <div class="form-group">
     <label>Health Category</label>
     <select class="form-control" formControlName="healthcategory" [ngClass]="{ 'is-invalid': submitted && f['healthcategory'].errors }">
-      <option value="0" selected>Select...</option>
+      <option value="0">Select...</option>
       <option value="1">Fair</option>
       <option value="2">Average</option>
       <option value="3">Good</option>
       <option value="4">Excellent</option>
+      
       
     </select>
   </div>
@@ -187,3 +184,4 @@
     </form>
 </div>
 
+<!-- //////////////////////////////////////////////////////////////////////// -->
