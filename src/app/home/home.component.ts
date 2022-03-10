@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbstractControl,FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import {countries} from '../shared/countrys-data-store';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   templateUrl: './home.component.html',
@@ -9,9 +10,12 @@ import { AbstractControl,FormControl, FormBuilder, FormGroup, Validators } from 
 })
 export class HomeComponent implements OnInit {
   persnalinfo: boolean = false;
+  nextpage:boolean=false;
+  public countries:any = countries;
   form: FormGroup = new FormGroup({
     firstname: new FormControl(''),
     lastname: new FormControl(''),
+    countrycode: new FormControl(''),
     mobileNumber: new FormControl(''),
     birthday: new FormControl(''),
     Height: new FormControl(''),
@@ -22,18 +26,21 @@ export class HomeComponent implements OnInit {
     coverageterm: new FormControl(''),
   });
   submitted = false;
+  myData: any;
+  Selectedbiodata:any;
   constructor(
     private router:Router,
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    private http: HttpClient
     ) { }
 
   ngOnInit(): void {
-    console.log("Enter home page");
     this.form = this.formBuilder.group(
       {
-        firstname: ['', Validators.required],
-        lastname: ['', Validators.required],
-        mobileNumber: [null, [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+        firstname: ['', Validators.required,Validators.pattern("[a-zA-Z][a-zA-Z ]+")],
+        lastname: ['', Validators.required,Validators.pattern("[a-zA-Z][a-zA-Z ]+")],
+        countrycode: [null, Validators.required],
+        mobileNumber: [null, [Validators.required,Validators.pattern("[0-9]{10}")]],
         birthday:['',Validators.required],
         Height:['',Validators.required],
         Weight:['',Validators.required],
@@ -54,7 +61,13 @@ export class HomeComponent implements OnInit {
     onSubmit(): void {debugger
       this.submitted = true;
       if (this.form.invalid) {
+        this.nextpage=false;
         return;
+      }else{
+        this.persnalinfo=false;
+        this.nextpage=true;
+        this.Selectedbiodata=this.form.value;
+        
       }
       console.log(JSON.stringify(this.form.value, null, 2));
     }
@@ -62,4 +75,15 @@ export class HomeComponent implements OnInit {
       this.submitted = false;
       this.form.reset();
     }
+    numbersOnlyValidator(event:any):void{
+    const pattern = /^[0-9\-]*$/;
+    if (!pattern.test(event.target.value)) {
+      event.target.value = event.target.value.replace(/[^0-9\-]/g, "");
+    }
+  }
+  saveDetails(){debugger
+
+  }
+  
+ 
 }
