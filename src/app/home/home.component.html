@@ -1,6 +1,6 @@
 <div class="navbar">Life Insurance</div>
 
-<div *ngIf="persnalinfo==false" class="container">
+<div class="container">
   <form action="/action_page.php">
     <div class="form-group">
       <label>Product:</label>
@@ -76,7 +76,7 @@
     </div>
     
   </form>
-  <button type="button" class="btn btn-primary btncolor" routerLink="personalinfo">Start a Quote</button>
+  <button type="button" class="btn btn-primary btncolor" routerLink="personalinfo" (click)="gotopersonalinfo()">Start a Quote</button>
 
 </div>
 <router-outlet></router-outlet>

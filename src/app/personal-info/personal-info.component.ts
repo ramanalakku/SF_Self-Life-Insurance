@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {countries} from '../shared/countrys-data-store';
 import { AbstractControl,FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-//import { GlobalService } from '../global.service';
+import { GlobalService } from '../global.service';
 
 @Component({
   selector: 'app-personal-info',
@@ -30,7 +30,7 @@ export class PersonalInfoComponent implements OnInit {
     coverageplan: new FormControl(''),
     coverageterm: new FormControl(''),
   });
-  constructor( private formBuilder:FormBuilder) { }
+  constructor( private formBuilder:FormBuilder,private globalservie:GlobalService) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
@@ -62,7 +62,7 @@ export class PersonalInfoComponent implements OnInit {
       return;
     }else{
       this.Selectedbiodata=this.form.value;
-      //this.golbalservice.setFormdata( this.Selectedbiodata);
+      this.globalservie.setFormdata( this.Selectedbiodata);
       
     }
     console.log(JSON.stringify(this.form.value, null, 2));
