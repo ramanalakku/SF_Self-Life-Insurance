@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbstractControl,FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {countries} from '../shared/countrys-data-store';
-import { personaldata } from '../shared/shared.model';
+import { personaldataobj } from '../shared/shared.model';
 
 import { HttpClient } from '@angular/common/http';
 @Component({
@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   persnalinfo: boolean = false;
   nextpage:boolean=false;
   public countries:any = countries;
-  public Selectedbiodata:any = personaldata;
+  public Selectedbiodata:any = personaldataobj;
   form: FormGroup = new FormGroup({
     firstname: new FormControl(''),
     lastname: new FormControl(''),
