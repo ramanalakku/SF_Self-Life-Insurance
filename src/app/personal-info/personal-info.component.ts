@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {countries} from '../shared/countrys-data-store';
 import { AbstractControl,FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GlobalService } from '../global.service';
+//import { GlobalService } from '../global.service';
 
 @Component({
   selector: 'app-personal-info',
   templateUrl: './personal-info.component.html',
-  styleUrls: ['./home/home.component.css']
+  styleUrls: ['./personal-info.component.css']
 })
 export class PersonalInfoComponent implements OnInit {
   persnalinfo: boolean = false;
@@ -30,7 +30,7 @@ export class PersonalInfoComponent implements OnInit {
     coverageplan: new FormControl(''),
     coverageterm: new FormControl(''),
   });
-  constructor( private formBuilder:FormBuilder,private golbalservice:GlobalService) { }
+  constructor( private formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
@@ -62,7 +62,7 @@ export class PersonalInfoComponent implements OnInit {
       return;
     }else{
       this.Selectedbiodata=this.form.value;
-      this.golbalservice.setFormdata( this.Selectedbiodata);
+      //this.golbalservice.setFormdata( this.Selectedbiodata);
       
     }
     console.log(JSON.stringify(this.form.value, null, 2));

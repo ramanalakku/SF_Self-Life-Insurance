@@ -8,7 +8,7 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
-import { SummarypageComponent } from './summarypage/summarypage.component';
+//import { SummarypageComponent } from './summarypage/summarypage.component';
 //import {  BsDatepickerModule } from 'ngx-bootstrap';
 
 @NgModule({
@@ -16,7 +16,7 @@ import { SummarypageComponent } from './summarypage/summarypage.component';
     AppComponent,
     HomeComponent,
     PersonalInfoComponent,
-    SummarypageComponent
+    //SummarypageComponent
   ],
   imports: [
     BrowserModule,

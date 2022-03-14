@@ -24,12 +24,11 @@ export class HomeComponent implements OnInit {
 
   }
   
-  gotopersonalinfo(){debugger
+  /*gotopersonalinfo(){debugger
     //  this.persnalinfo=true;
-   this.router.navigate(['/personalinfo']);
+    this.router.navigate(['/personalinfo']);
    
-    }
-    
+    }*/
    
    
  
