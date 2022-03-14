@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbstractControl,FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {countries} from '../shared/countrys-data-store';
+import { personaldata } from '../shared/shared.model';
 import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ export class HomeComponent implements OnInit {
   persnalinfo: boolean = false;
   nextpage:boolean=false;
   public countries:any = countries;
+  public Selectedbiodata:any = personaldata;
   form: FormGroup = new FormGroup({
     firstname: new FormControl(''),
     lastname: new FormControl(''),
@@ -27,7 +29,6 @@ export class HomeComponent implements OnInit {
   });
   submitted = false;
   myData: any;
-  Selectedbiodata:any;
   constructor(
     private router:Router,
     private formBuilder:FormBuilder,
@@ -37,17 +38,17 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group(
       {
-        firstname: ['', Validators.required,Validators.pattern("[a-zA-Z][a-zA-Z ]+")],
-        lastname: ['', Validators.required,Validators.pattern("[a-zA-Z][a-zA-Z ]+")],
-        countrycode: [null, Validators.required],
+        firstname: ['', [Validators.required,Validators.pattern("[a-zA-Z][a-zA-Z ]+")]],
+        lastname: ['', [Validators.required,Validators.pattern("[a-zA-Z][a-zA-Z ]+")]],
+        countrycode: [null, [Validators.required]],
         mobileNumber: [null, [Validators.required,Validators.pattern("[0-9]{10}")]],
-        birthday:['',Validators.required],
-        Height:['',Validators.required],
-        Weight:['',Validators.required],
-        radio_gender:['',Validators.required],
-        healthcategory:['',Validators.required],
-        coverageplan:['',Validators.required],
-        coverageterm:['',Validators.required],
+        birthday:['',[Validators.required]],
+        Height:['',[Validators.required]],
+        Weight:['',[Validators.required]],
+        radio_gender:['',[Validators.required]],
+        healthcategory:['',[Validators.required]],
+        coverageplan:['',[Validators.required]],
+        coverageterm:['',[Validators.required]],
       }
     )
   }
@@ -80,6 +81,11 @@ export class HomeComponent implements OnInit {
     if (!pattern.test(event.target.value)) {
       event.target.value = event.target.value.replace(/[^0-9\-]/g, "");
     }
+  }
+  preview(){debugger
+    this.persnalinfo=true;
+    this.nextpage=false;
+    this.form.value;
   }
   saveDetails(){debugger
 

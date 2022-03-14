@@ -1,0 +1,39 @@
+<div class="navbar">Life Insurance</div>
+<div>
+    <h1>Summary</h1>
+        <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Birthday</th>
+                <th scope="col">Sex</th>
+                <th scope="col">Height</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Coverage</th>
+                <th scope="col">Health</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{Selectedbiodata.firstname}} {{Selectedbiodata.lastname}}</td>
+                <td>{{Selectedbiodata.countrycode}}-{{Selectedbiodata.mobileNumber}}</td>
+                <td>{{Selectedbiodata.birthday}}</td>
+                <td>{{Selectedbiodata.radio_gender}}</td>
+                <td>{{Selectedbiodata.Height}} cm</td>
+                <td>{{Selectedbiodata.Weight}} lbs</td>
+                <td>{{Selectedbiodata.coverageplan}} for {{Selectedbiodata.coverageterm}}</td>
+                <td>{{Selectedbiodata.healthcategory}}</td>
+              </tr>
+            
+            </tbody>
+          </table>
+          <div class="form-group continue">
+            <button type="submit" class="btn btn-primary btncolor" (click)="saveDetails()">Continue</button>
+            
+          </div>
+    </div>
+    <!-- <div class="alert alert-success text-center" *ngIf="alertshow">
+        <span>Your Data Sent Successfully...Our Agent Will Meet You</span>
+        <button class="btn btn-primary "  (click)="cancelalert()">OK</button>
+    </div> -->

@@ -75,7 +75,7 @@
     </div>
     
   </form>
-  <button type="button" class="btn btn-primary btncolor" (click)="gotoHome()">Start a Quote</button>
+  <button type="button" class="btn btncolor" (click)="gotoHome()">Start a Quote</button>
 
 </div>
 <!-- //////////////////////////////////////////////////////////////////////// -->
@@ -132,8 +132,8 @@
     
     <div class="tab">
         <label>Height/Weight <b class="starred"> *</b></label>
-      <p><input placeholder="Height in cms..."  type="text" formControlName="Height" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['Height'].errors }"></p>
-      <p><input placeholder="Weight in lbs..." type="text" formControlName="Weight" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['Weight'].errors }"></p>
+      <p><input placeholder="Height in cms..."  type="number" formControlName="Height" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['Height'].errors }"></p>
+      <p><input placeholder="Weight in lbs..." type="number" formControlName="Weight" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['Weight'].errors }"></p>
     </div>
 
     <div class="tab">
@@ -182,11 +182,11 @@
   </div>
 
     <div class="form-group">
-        <button type="submit" class="btn btn-primary btncolor">Submit</button>
+        <button type="submit" class="btn btncolor float-right">Submit</button>
         <button
           type="button"
           (click)="onReset()"
-          class="btn btn-warning float-right"
+          class="btn btncolor"
         >
           Reset
         </button>
@@ -197,7 +197,7 @@
 
 <!-- //////////////////////////////////////////////////////////////////////// -->
 <div *ngIf="nextpage">
-    <h1>Let's review your answers</h1>
+    <h1>Review Your Details</h1>
         <table class="table table-borderless">
             <thead>
               <tr>
@@ -225,8 +225,11 @@
             
             </tbody>
           </table>
+          
+          
           <div class="form-group continue">
-            <button type="submit" class="btn btn-primary btncolor" (click)="saveDetails()">Continue</button>
-            
+            <button type="button" class="btn btncolor" (click)="preview()">Preview</button>
+            <button type="submit" (click)="onReset()" class="btn btncolor float-right"(click)="saveDetails()">Continue</button>
           </div>
+          <!-- <div class="proceed"><p>Please click on Continue to proceed</p></div> -->
     </div>
