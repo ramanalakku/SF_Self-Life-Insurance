@@ -1,5 +1,6 @@
 <div class="navbar">Life Insurance</div>
-<div *ngIf="persnalinfo==false && nextpage==false" class="container">
+
+<div class="container">
   <form action="/action_page.php">
     <div class="form-group">
       <label>Product:</label>
@@ -75,40 +76,17 @@
     </div>
     
   </form>
+<<<<<<< HEAD
+  <button type="button" class="btn btn-primary btncolor" routerLink="personalinfo" (click)="gotopersonalinfo()">Start a Quote</button>
+=======
   <button type="button" class="btn btncolor" (click)="gotoHome()">Start a Quote</button>
+>>>>>>> Summary_page_new
 
 </div>
-<!-- //////////////////////////////////////////////////////////////////////// -->
-<div *ngIf="persnalinfo">
-  <form id="regForm" [formGroup]="form" (ngSubmit)="onSubmit()">
-      <h1>Personal Information</h1>
-    <div class="tab">
-        <label>Name<b class="starred"> *</b></label>
-        <p><input placeholder="First name..."  type="text" pattern="[a-zA-Z][a-zA-Z ]+" formControlName="firstname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['firstname'].errors }"></p>
-        <div *ngIf="f['firstname'].touched && f['firstname'].invalid && submitted" class="alert alert-danger">
-            <div *ngIf="f['firstname'].hasError('required')">First Name is required.</div>
-            <div *ngIf="f['firstname'].hasError('pattern')">Only alphabetsallowed</div>
-        </div>
-        <p><input placeholder="Last name..." ype="text" pattern="[a-zA-Z][a-zA-Z ]+" formControlName="lastname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['lastname'].errors }"></p>
-        <div *ngIf="f['lastname'].touched && f['lastname'].invalid && submitted" class="alert alert-danger">
-            <div *ngIf="f['lastname'].hasError('required')">Last Name is required.</div>
-            <div *ngIf="f['lastname'].hasError('pattern')">Only alphabetsallowed</div>
-        </div>
-    </div>
-    <div class="tab">
-        <label>Contact Info</label>
-        <div class="padding-div">
-        <label>Country Code<b class="starred"> *  </b></label>
-        <select class="form-control-change" name="country" id="country" formControlName="countrycode"
-         [ngClass]="{ 'is-invalid': submitted && f['countrycode'].errors }"> 
-            <option value="" disabled selected>Select Country</option>
-            <option *ngFor="let country of countries" [value]="country.code">{{country.code}} - {{country.name}}</option>
-       </select>
-       <div *ngIf="f['countrycode'].touched && f['countrycode'].invalid && submitted" class="alert alert-danger">
-        <div *ngIf="f['countrycode'].hasError('required') && submitted">Country Code is required.</div>
-    </div>
-</div>
+<router-outlet></router-outlet>
 
+<<<<<<< HEAD
+=======
         <input 
         placeholder="Mobile number..."
         formControlName="mobileNumber"
@@ -233,3 +211,4 @@
           </div>
           <!-- <div class="proceed"><p>Please click on Continue to proceed</p></div> -->
     </div>
+>>>>>>> Summary_page_new
