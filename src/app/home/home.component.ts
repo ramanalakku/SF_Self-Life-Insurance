@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AbstractControl,FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {countries} from '../shared/countrys-data-store';
 import { personaldata } from '../shared/shared.model';
+
 import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-root',
@@ -29,13 +30,15 @@ export class HomeComponent implements OnInit {
   });
   submitted = false;
   myData: any;
+
   constructor(
     private router:Router,
+    private http: HttpClient,
     private formBuilder:FormBuilder,
-    private http: HttpClient
     ) { }
 
   ngOnInit(): void {
+
     this.form = this.formBuilder.group(
       {
         firstname: ['', [Validators.required,Validators.pattern("[a-zA-Z][a-zA-Z ]+")]],
@@ -89,7 +92,15 @@ export class HomeComponent implements OnInit {
   }
   saveDetails(){debugger
 
+
   }
   
+  gotopersonalinfo(){debugger
+    
+    this.router.navigate(['/personalinfo']);
+   
+    }
+   
+   
  
 }
