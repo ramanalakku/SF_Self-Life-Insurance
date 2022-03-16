@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AbstractControl,FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {countries} from '../shared/countrys-data-store';
 import { personaldataobj } from '../shared/shared.model';
+import { GlobalService } from '../global.service';
 
 import { HttpClient } from '@angular/common/http';
 @Component({
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit {
     private router:Router,
     private http: HttpClient,
     private formBuilder:FormBuilder,
+    private globalService:GlobalService
     ) { }
 
   ngOnInit(): void {
@@ -71,7 +73,7 @@ export class HomeComponent implements OnInit {
         this.persnalinfo=false;
         this.nextpage=true;
         this.Selectedbiodata=this.form.value;
-        
+        this.globalService.setFormdata(this.Selectedbiodata);
       }
       console.log(JSON.stringify(this.form.value, null, 2));
     }
