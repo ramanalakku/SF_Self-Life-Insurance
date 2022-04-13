@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbstractControl,FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {countries} from '../shared/countrys-data-store';
-import { personaldataobj } from '../shared/shared.model';
+import { personaldataobj,Config,Info } from '../shared/shared.model';
 import { GlobalService } from '../global.service';
-
-import { HttpClient } from '@angular/common/http';
+//import { NotificationService } from './../shared/notification.service';
+import { HttpClient,HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   templateUrl: './home.component.html',
@@ -14,7 +14,9 @@ import { HttpClient } from '@angular/common/http';
 export class HomeComponent implements OnInit {
   persnalinfo: boolean = false;
   nextpage:boolean=false;
+  detailspage:boolean=false;
   public countries:any = countries;
+  phonenumbervalue:any='';
   public Selectedbiodata:any = personaldataobj;
   form: FormGroup = new FormGroup({
     firstname: new FormControl(''),
@@ -31,6 +33,7 @@ export class HomeComponent implements OnInit {
   });
   submitted = false;
   myData: any;
+  getdeatisldata:any;
 
   constructor(
     private router:Router,
@@ -70,10 +73,12 @@ export class HomeComponent implements OnInit {
         this.nextpage=false;
         return;
       }else{
+      debugger
         this.persnalinfo=false;
         this.nextpage=true;
         this.Selectedbiodata=this.form.value;
         this.globalService.setFormdata(this.Selectedbiodata);
+        //this.notificationService.success('Your Details added Successfully!');
       }
       console.log(JSON.stringify(this.form.value, null, 2));
     }
@@ -94,8 +99,36 @@ export class HomeComponent implements OnInit {
   }
   saveDetails(){debugger
 
-
-  }
+    this.globalService.saveDetails(this.Selectedbiodata)
+    .subscribe((responce:Info) => {
+        if(responce){
+          alert("Your Details added Successfully!");
+          this.persnalinfo=false;
+          this.nextpage=false;
+        }
+      },(error: HttpErrorResponse) => {
+       
+      }
+    );
+}
+getDetails(phonenumbervalue:string){debugger
+  this.globalService.getDetails(phonenumbervalue)
+        .subscribe (data => {
+          if(data){
+            this.getdeatisldata=data;
+            this.detailspage=true;
+             this.nextpage=false;
+             this.persnalinfo=false;
+          }else{
+            alert("No Data Found!");
+          }
+      });
+}
+home(){
+  this.detailspage=false;
+  this.persnalinfo=false;
+  this.nextpage=false;
+}
   
   gotopersonalinfo(){debugger
     

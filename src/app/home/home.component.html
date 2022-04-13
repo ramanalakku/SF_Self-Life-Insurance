@@ -1,5 +1,10 @@
-<div class="navbar">Life Insurance</div>
-<div *ngIf="persnalinfo==false && nextpage==false" class="container">
+<div class="navbar">Life Insurance
+  <form class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="search" placeholder="Mobile Number" aria-label="Search" [(ngModel)]="phonenumbervalue">
+    <button class="btn my-2 my-sm-0" type="submit" (click)="getDetails(phonenumbervalue)">Get Info</button>
+  </form>
+</div>
+<div *ngIf="persnalinfo==false && nextpage==false && detailspage==false" class="container">
   <form action="/action_page.php">
     <div class="form-group">
       <label>Product:</label>
@@ -89,7 +94,7 @@
             <div *ngIf="f['firstname'].hasError('required')">First Name is required.</div>
             <div *ngIf="f['firstname'].hasError('pattern')">Only alphabetsallowed</div>
         </div>
-        <p><input placeholder="Last name..." ype="text" pattern="[a-zA-Z][a-zA-Z ]+" formControlName="lastname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['lastname'].errors }"></p>
+        <p><input placeholder="Last name..." type="text" pattern="[a-zA-Z][a-zA-Z ]+" formControlName="lastname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['lastname'].errors }"></p>
         <div *ngIf="f['lastname'].touched && f['lastname'].invalid && submitted" class="alert alert-danger">
             <div *ngIf="f['lastname'].hasError('required')">Last Name is required.</div>
             <div *ngIf="f['lastname'].hasError('pattern')">Only alphabetsallowed</div>
@@ -228,8 +233,45 @@
           
           
           <div class="form-group continue">
-            <button type="button" class="btn btncolor" (click)="preview()">Preview</button>
+            <button type="button" class="btn btncolor" (click)="preview()">Edit</button>
             <button type="submit" (click)="onReset()" class="btn btncolor float-right"(click)="saveDetails()">Continue</button>
           </div>
           <!-- <div class="proceed"><p>Please click on Continue to proceed</p></div> -->
     </div>
+
+    <div *ngIf="detailspage">
+      <h1>Your Details</h1>
+          <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Birthday</th>
+                  <th scope="col">Sex</th>
+                  <th scope="col">Height</th>
+                  <th scope="col">Weight</th>
+                  <th scope="col">Coverage</th>
+                  <th scope="col">Health</th>
+                </tr>
+              </thead>
+              <tbody> 
+                <tr *ngFor="let Selectedbiodata1 of getdeatisldata">
+                  <td>{{Selectedbiodata1.name}}</td>
+                  <td>{{Selectedbiodata1.phonenoid}}</td>
+                  <td>{{Selectedbiodata1.DOB}}</td>
+                  <td>{{Selectedbiodata1.gender}}</td>
+                  <td>{{Selectedbiodata1.height}} cm</td>
+                  <td>{{Selectedbiodata1.weight}} lbs</td>
+                  <td>{{Selectedbiodata1.plan}}</td>
+                  <td>{{Selectedbiodata1.health}}</td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
+            
+            <div class="form-group continue">
+              <button type="submit" (click)="onReset()" class="btn btncolor float-right" (click)="home()">Home</button>
+            </div>
+            <!-- <div class="proceed"><p>Please click on Continue to proceed</p></div> -->
+      </div>    
