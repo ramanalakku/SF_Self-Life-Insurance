@@ -1,10 +1,10 @@
 <div class="navbar">Life Insurance
   <form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="search" placeholder="Mobile Number" aria-label="Search" [(ngModel)]="phonenumbervalue">
-    <button class="btn my-2 my-sm-0" type="submit" (click)="getDetails(phonenumbervalue)">Get Info</button>
+    <input class="form-control mr-sm-2" type="number" placeholder="Mobile Number" aria-label="Search"  #phonenumbervalue>
+    <button class="btn btn-primary" style="border-block-color: initial;background-color: antiquewhite;color: black;" type="submit" (click)="getDetails(phonenumbervalue.value)">Get Info</button>
   </form>
 </div>
-<div *ngIf="persnalinfo==false && nextpage==false && detailspage==false" class="container">
+<div *ngIf="persnalinfo==false && nextpage==false && detailspage==false && finaldetailspage==false && finalpage==false" class="container">
   <form action="/action_page.php">
     <div class="form-group">
       <label>Product:</label>
@@ -168,10 +168,10 @@
     <label>Coverage Plan  <b class="starred"> *</b></label>
     <select  class="form-control" formControlName="coverageplan" [ngClass]="{ 'is-invalid': submitted && f['coverageplan'].errors }">
       <!-- <option value="0">Select...</option> -->
-      <option value="$10000">$10000</option>
-      <option value="$25000">$25000</option>
-      <option value="$50000">$50000</option>
       <option value="$100000">$100000</option>
+      <option value="$250000">$250000</option>
+      <option value="$500000">$500000</option>
+      <!-- <option value="$100000">$100000</option> -->
       <!-- <option value="4">others</option> -->
     </select>
   </div>
@@ -234,7 +234,7 @@
           
           <div class="form-group continue">
             <button type="button" class="btn btncolor" (click)="preview()">Edit</button>
-            <button type="submit" (click)="onReset()" class="btn btncolor float-right"(click)="saveDetails()">Continue</button>
+            <button type="submit" class="btn btncolor float-right"(click)="Continue()">Continue</button>
           </div>
           <!-- <div class="proceed"><p>Please click on Continue to proceed</p></div> -->
     </div>
@@ -255,7 +255,7 @@
                 </tr>
               </thead>
               <tbody> 
-                <tr *ngFor="let Selectedbiodata1 of getdeatisldata">
+                <!-- <tr *ngFor="let Selectedbio data1 of getdeatisldata">
                   <td>{{Selectedbiodata1.name}}</td>
                   <td>{{Selectedbiodata1.phonenoid}}</td>
                   <td>{{Selectedbiodata1.DOB}}</td>
@@ -264,6 +264,17 @@
                   <td>{{Selectedbiodata1.weight}} lbs</td>
                   <td>{{Selectedbiodata1.plan}}</td>
                   <td>{{Selectedbiodata1.health}}</td>
+                </tr> -->
+
+                <tr>
+                  <td>{{getdeatisldata.name}}</td>
+                  <td>{{getdeatisldata.phonenoid}}</td>
+                  <td>{{getdeatisldata.DOB}}</td>
+                  <td>{{getdeatisldata.gender}}</td>
+                  <td>{{getdeatisldata.height}} cm</td>
+                  <td>{{getdeatisldata.weight}} lbs</td>
+                  <td>{{getdeatisldata.plan}}</td>
+                  <td>{{getdeatisldata.health}}</td>
                 </tr>
               
               </tbody>
@@ -275,3 +286,52 @@
             </div>
             <!-- <div class="proceed"><p>Please click on Continue to proceed</p></div> -->
       </div>    
+      <div *ngIf="finaldetailspage">
+        <h3 style="text-align: center;">Quotation Amount for Monthly</h3>
+        <div class="summaryTable" aria-live="polite">
+          <div class="-oneX-row ">
+            <h1>{{insurencefinalprice}}/Month</h1>
+          </div>
+          <br>
+          <div class="-oneX-row">
+            <div class="-oneX-col-6">{{Selectedbiodata.coverageplan}} for {{Selectedbiodata.coverageterm}}</div>
+            <div class="-oneX-col-3">
+              <b>{{insurencefinalprice}}</b>
+            </div>
+          </div>
+              <hr> 
+            </div>
+        <div class="form-group continue">
+          <button type="button" class="btn btncolor" (click)="changeQuote()">Change Quote</button>
+          <button type="submit" class="btn btncolor float-right"(click)="saveDetails()">Send Quote to an Agent </button>
+        </div>
+      </div>
+      <div id='card' class="animated fadeIn" *ngIf="finalpage">
+        <!-- <div id='upper-side'>
+   <i class="fa fa-check"></i>
+   <h3 id='status'> Success </h3> 
+</div> -->
+        <div id='upper-side'>
+         <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+            <svg version="1.1" id="checkmark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" xml:space="preserve">
+              <path d="M131.583,92.152l-0.026-0.041c-0.713-1.118-2.197-1.447-3.316-0.734l-31.782,20.257l-4.74-12.65
+        c-0.483-1.29-1.882-1.958-3.124-1.493l-0.045,0.017c-1.242,0.465-1.857,1.888-1.374,3.178l5.763,15.382
+        c0.131,0.351,0.334,0.65,0.579,0.898c0.028,0.029,0.06,0.052,0.089,0.08c0.08,0.073,0.159,0.147,0.246,0.209
+        c0.071,0.051,0.147,0.091,0.222,0.133c0.058,0.033,0.115,0.069,0.175,0.097c0.081,0.037,0.165,0.063,0.249,0.091
+        c0.065,0.022,0.128,0.047,0.195,0.063c0.079,0.019,0.159,0.026,0.239,0.037c0.074,0.01,0.147,0.024,0.221,0.027
+        c0.097,0.004,0.194-0.006,0.292-0.014c0.055-0.005,0.109-0.003,0.163-0.012c0.323-0.048,0.641-0.16,0.933-0.346l34.305-21.865
+        C131.967,94.755,132.296,93.271,131.583,92.152z" />
+              <circle fill="none" stroke="#ffffff" stroke-width="5" stroke-miterlimit="10" cx="109.486" cy="104.353" r="32.53" />
+            </svg>
+            <h3 id='status'>
+            Success
+          </h3>
+        </div>
+        <div id='lower-side'>
+          <p id='message'>
+            Your Details added Successfully and State Farm agent will followup with you.
+          </p>
+          <a href="#" id="contBtn">Continue</a>
+        </div>
+      </div>
+      

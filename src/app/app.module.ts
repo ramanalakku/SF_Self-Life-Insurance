@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { SummarypageComponent } from './summarypage/summarypage.component';
+import { NgxSpinnerModule } from "ngx-spinner";  
 //import {  BsDatepickerModule } from 'ngx-bootstrap';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { SummarypageComponent } from './summarypage/summarypage.component';
     AppRoutingModule,
     FormsModule, 
     ReactiveFormsModule,
+    NgxSpinnerModule,
     // RouterModule.forRoot([
     //   {path: 'home', component: HomeComponent},
     //   {path: 'personalinfo', component: PersonalInfoComponent},
