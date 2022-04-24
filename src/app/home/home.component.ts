@@ -7,6 +7,8 @@ import { GlobalService } from '../global.service';
 //import { NotificationService } from './../shared/notification.service';
 import { HttpClient,HttpErrorResponse } from '@angular/common/http';
 import { NgxSpinnerService } from "ngx-spinner"; 
+//import {UpperCasePipe} from '@angular/common';
+//import {uuid} from 'uuid';
 @Component({
   selector: 'app-root',
   templateUrl: './home.component.html',
@@ -19,6 +21,7 @@ export class HomeComponent implements OnInit {
   finalpage:boolean=false;
   finaldetailspage:boolean=false;
   insurencefinalprice:any;
+  policynumber:any;
   public countries:any = countries;
  // phonenumbervalue:any;
   public Selectedbiodata:any = personaldataobj;
@@ -133,10 +136,11 @@ export class HomeComponent implements OnInit {
   saveDetails(){debugger
     //this.phonenumbervalue="";
     this.SpinnerService.show();
-    this.globalService.saveDetails(this.Selectedbiodata)
-    .subscribe((responce:Info) => {
+    this.globalService.saveDetails(this.Selectedbiodata,this.insurencefinalprice)
+    .subscribe((responce:Info) => {debugger
         if(responce){
           // alert("Your Details added Successfully and State Farm agent will followup with you.");
+          this.policynumber=responce;
           this.finalpage=true;
           this.finaldetailspage=false;
            this.persnalinfo=false;

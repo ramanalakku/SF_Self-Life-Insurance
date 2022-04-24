@@ -1,6 +1,6 @@
 <div class="navbar">Life Insurance
-  <form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="number" placeholder="Mobile Number" aria-label="Search"  #phonenumbervalue>
+  <form class="form-inline my-2 my-lg-0" *ngIf="persnalinfo==false && nextpage==false && detailspage==false && finaldetailspage==false && finalpage==false">
+    <input class="form-control mr-sm-2" type="search" placeholder="Policy Number" aria-label="Search"  #phonenumbervalue>
     <button class="btn btn-primary" style="border-block-color: initial;background-color: antiquewhite;color: black;" type="submit" (click)="getDetails(phonenumbervalue.value)">Get Info</button>
   </form>
 </div>
@@ -252,29 +252,20 @@
                   <th scope="col">Weight</th>
                   <th scope="col">Coverage</th>
                   <th scope="col">Health</th>
+                  <th scope="col">Quotation Amount</th>
                 </tr>
               </thead>
-              <tbody> 
-                <!-- <tr *ngFor="let Selectedbio data1 of getdeatisldata">
-                  <td>{{Selectedbiodata1.name}}</td>
-                  <td>{{Selectedbiodata1.phonenoid}}</td>
-                  <td>{{Selectedbiodata1.DOB}}</td>
-                  <td>{{Selectedbiodata1.gender}}</td>
-                  <td>{{Selectedbiodata1.height}} cm</td>
-                  <td>{{Selectedbiodata1.weight}} lbs</td>
-                  <td>{{Selectedbiodata1.plan}}</td>
-                  <td>{{Selectedbiodata1.health}}</td>
-                </tr> -->
-
+              <tbody>
                 <tr>
                   <td>{{getdeatisldata.name}}</td>
-                  <td>{{getdeatisldata.phonenoid}}</td>
-                  <td>{{getdeatisldata.DOB}}</td>
+                  <td>{{getdeatisldata.phonenumber}}</td>
+                  <td>{{getdeatisldata.dob}}</td>
                   <td>{{getdeatisldata.gender}}</td>
                   <td>{{getdeatisldata.height}} cm</td>
                   <td>{{getdeatisldata.weight}} lbs</td>
                   <td>{{getdeatisldata.plan}}</td>
                   <td>{{getdeatisldata.health}}</td>
+                  <td>{{getdeatisldata.quotationamount}}</td>
                 </tr>
               
               </tbody>
@@ -287,17 +278,14 @@
             <!-- <div class="proceed"><p>Please click on Continue to proceed</p></div> -->
       </div>    
       <div *ngIf="finaldetailspage">
-        <h3 style="text-align: center;">Quotation Amount for Monthly</h3>
-        <div class="summaryTable" aria-live="polite">
+        <h3 style="text-align: center;">Quotation Amount</h3>
+        <div class="summaryTable" aria-live="polite" style="padding-top: 40px;">
           <div class="-oneX-row ">
-            <h1>{{insurencefinalprice}}/Month</h1>
+            <h1 style="color:rgba(240,121,94,1);">{{insurencefinalprice}}/Month</h1>
           </div>
           <br>
           <div class="-oneX-row">
-            <div class="-oneX-col-6">{{Selectedbiodata.coverageplan}} for {{Selectedbiodata.coverageterm}}</div>
-            <div class="-oneX-col-3">
-              <b>{{insurencefinalprice}}</b>
-            </div>
+            <div class="-oneX-col-6" style="text-align: center;">{{Selectedbiodata.coverageplan}} for {{Selectedbiodata.coverageterm}}</div>
           </div>
               <hr> 
             </div>
@@ -330,6 +318,9 @@
         <div id='lower-side'>
           <p id='message'>
             Your Details added Successfully and State Farm agent will followup with you.
+          </p>
+          <p>
+            Your Policy number is <b>{{policynumber}}</b>
           </p>
           <a href="#" id="contBtn">Continue</a>
         </div>

@@ -20,9 +20,9 @@ export interface Config {
     date: any;
   }
   export interface Info {
-    "phonenoid": string;
+    "phonenumber": string;
     "name": string;
-    "DOB": string;
+    "dob": string;
     "product": string;
     "gender": string;
     "height":string;
@@ -31,5 +31,6 @@ export interface Config {
     "plan":string;
     "term":string;
     "state":string;
+    "quotationamount":string
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import {personaldataobj,Config,Info} from './shared/shared.model'
 import { Observable } from 'rxjs';
 
@@ -21,14 +21,17 @@ getFormdata(): personaldataobj {
   return this.formData;
 }
 getDetails(mobileNumber: string){
-  return this.httpClient.get<Info>(this.url1+"/"+mobileNumber);
+  var mobnumber=(mobileNumber.toUpperCase( ));
+  return this.httpClient.get<Info>(this.url1+"/"+mobnumber);
 }
 
-saveDetails(data: any): Observable<Info> {debugger
+saveDetails(data: any,quotationamount:string): Observable<Info> {debugger
+  var today=new Date();
+  var policynoid=(""+today.getMonth()+ today.getDate()+today.getSeconds()+today.getMilliseconds());
   var changedata={
-    "phonenoid": data.countrycode+""+data.mobileNumber,
+    "phonenumber": data.countrycode+" - "+data.mobileNumber,
     "name": data.firstname+" "+data.lastname,
-    "DOB":data.birthday,
+    "dob":data.birthday,
     "product":"Auto",
     "gender": data.radio_gender,
     "height":data.Height,
@@ -36,9 +39,16 @@ saveDetails(data: any): Observable<Info> {debugger
     "health":data.healthcategory,
     "plan":data.coverageplan,
     "term":data.coverageterm,
-    "state":"nt"
+    "state":"nt",
+    "policynoid":policynoid,
+    "quotationamount":quotationamount+"/Month"
 
 }
-         return this.httpClient.post<Info>(this.url2, changedata);
+const headers = {
+  headers: new HttpHeaders()
+      .set('Content-Type', "application/json")
+}
+
+         return this.httpClient.post<Info>(this.url2, changedata,headers);
 }
 }
